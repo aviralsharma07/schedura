@@ -6,13 +6,14 @@ import { useUser } from "@clerk/nextjs";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { userNameSchema } from "@/app/lib/validators";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useFetch from "@/hooks/use-fetch";
 import { updateUsername } from "@/actions/users";
 import { BarLoader } from "react-spinners";
 
 const Dashboard = () => {
   const { isLoaded, user } = useUser();
+  const [origin, setOrigin] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -25,6 +26,13 @@ const Dashboard = () => {
   useEffect(() => {
     setValue("username", user?.username);
   }, [isLoaded]);
+
+  useEffect(() => {
+    // Safely set the origin in the client environment
+    if (typeof window !== "undefined") {
+      setOrigin(window.location.origin);
+    }
+  }, []);
 
   const { loading, error, fn: fnUpdateUsername } = useFetch(updateUsername);
 
@@ -49,7 +57,7 @@ const Dashboard = () => {
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
               <div className="flex items-center gap-2">
-                <span>{window?.location.origin}</span>
+                <span>{origin}</span>
                 <Input {...register("username")} placeholder="username" />
               </div>
 
