@@ -94,7 +94,7 @@ const EventForm = ({ onSubmitForm }: EventFormProps) => {
         {errors.isPrivate && <p className="text-sm text-red-500 mt-1">{errors.isPrivate.message as string}</p>}
       </div>
 
-      {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
+      {error && <p className="text-red-500 text-xs mt-1">{error?.message}</p>}
       <Button type="submit" disabled={loading!}>
         {loading ? "Submitted..." : "Create Event"}
       </Button>

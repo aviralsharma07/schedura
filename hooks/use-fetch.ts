@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-const useFetch = (callback) => {
-  const [data, setData] = useState(undefined);
-  const [loading, setLoading] = useState(null);
-  const [error, setError] = useState(null);
+const useFetch = (callback: Function) => {
+  const [data, setData] = useState<any>(undefined);
+  const [loading, setLoading] = useState<boolean | null>(null);
+  const [error, setError] = useState<Error | null>(null);
 
-  const fn = async (...args) => {
+  const fn = async (...args: any[]) => {
     setLoading(true);
     setError(null);
     try {
@@ -13,7 +13,7 @@ const useFetch = (callback) => {
       setData(response);
       setError(null);
     } catch (e) {
-      setError(e);
+      setError(e as Error);
     } finally {
       setLoading(false);
     }

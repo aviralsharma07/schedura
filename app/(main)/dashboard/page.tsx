@@ -62,7 +62,7 @@ const Dashboard = () => {
               </div>
 
               {errors.username && <p className="text-sm text-red-500 mt-1">{errors.username.message as string}</p>}
-              {error && <p className="text-sm text-red-500 mt-1">{error}</p>}
+              {error && <p className="text-sm text-red-500 mt-1">{error?.message}</p>}
             </div>
             {loading && <BarLoader color="#2563EB" className="mb-4" width={"100%"} />}
             <Button type="submit">Update Username</Button>
