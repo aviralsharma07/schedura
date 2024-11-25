@@ -20,7 +20,7 @@ export async function getUserMeetings(type = "upcoming") {
   const meetings = await db.booking.findMany({
     where: {
       userId: user.id,
-      startTime: type === "upcoming" ? { gt: now } : { lt: now },
+      startTime: type === "upcoming" ? { gte: now } : { lt: now },
     },
     include: {
       event: {
