@@ -10,6 +10,8 @@ import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import useFetch from "@/hooks/use-fetch";
+import { createBooking } from "@/actions/bookings";
 
 interface DataProps {
   name: string;
@@ -29,7 +31,7 @@ type BookingFormProps = {
   availability: AvailabilitySlot[]; // Custom type for availability
 };
 
-const BookingForm = ({ availability }: BookingFormProps) => {
+const BookingForm = ({ event, availability }: BookingFormProps) => {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const {
@@ -57,9 +59,44 @@ const BookingForm = ({ availability }: BookingFormProps) => {
     }
   }, [selectedTime]);
 
+  const { loading, data, fn: fnCreateBooking } = useFetch(createBooking);
+
   const onSubmit = async (data: DataProps) => {
     console.log(data);
+    if (!selectedDate || !selectedTime) {
+      return;
+    }
+
+    const startTime = new Date(`${format(selectedDate, "yyyy-MM-dd")}T${selectedTime}`);
+    const endTime = new Date(startTime.getTime() + event.duration * 60000);
+
+    const bookingData = {
+      eventId: event.id,
+      name: data.name,
+      email: data.email,
+      startTime: startTime.toISOString(),
+      endTime: endTime.toISOString(),
+      additionalInfo: data.additionalInfo,
+    };
+
+    await fnCreateBooking(bookingData);
   };
+
+  if (data) {
+    return (
+      <div className="text-center p-10 border bg-white">
+        <h2 className="text-2xl font-bold mb-4">Booking Successfull</h2>
+        {data.meetLink && (
+          <p>
+            Join the meeting:{" "}
+            <a href={data.meetLink} target="_blank" rel="noopener_noreferrer" className="text-blue-500 hover:underline">
+              {data.meetLink}
+            </a>
+          </p>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-8 p-10 border bg-white">
@@ -111,7 +148,9 @@ const BookingForm = ({ availability }: BookingFormProps) => {
             <Textarea {...register("additionalInfo")} placeholder="Additional Information" />
             {errors.additionalInfo && <p className="text-red-500 text-sm">{String(errors.additionalInfo.message)}</p>}
           </div>
-          <Button>Schedule Event</Button>
+          <Button type="submit" disabled={loading!} className="w-full">
+            {loading ? "Scheduling..." : "Schedule Event"}
+          </Button>
         </form>
       )}
     </div>
