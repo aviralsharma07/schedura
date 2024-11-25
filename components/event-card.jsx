@@ -30,8 +30,14 @@ const EventCard = ({ event, username, isPublic = false }) => {
     }
   };
 
+  const handleCardClick = (e) => {
+    if (e.target.tagName !== "BUTTON" && e.target.tagName !== "SVG") {
+      window?.open(`${window?.location.origin}/${username}/${event.id}`, "_blank");
+    }
+  };
+
   return (
-    <Card className="flex flex-col cursor-pointer justify-between">
+    <Card className="flex flex-col cursor-pointer justify-between" onClick={handleCardClick}>
       <CardHeader>
         <CardTitle className="text-2xl">{event.title}</CardTitle>
         <CardDescription className="flex justify-between">
