@@ -80,8 +80,8 @@ export async function updateUserAvailability(data: AvailabilityFormValues) {
       return [
         {
           day: day.toUpperCase() as DayOfWeek,
-          startTime: new Date(`${baseDate}T${startTime}`),
-          endTime: new Date(`${baseDate}T${endTime}`),
+          startTime: new Date(`${baseDate}T${startTime}:00Z`),
+          endTime: new Date(`${baseDate}T${endTime}:00Z`),
         },
       ];
     }

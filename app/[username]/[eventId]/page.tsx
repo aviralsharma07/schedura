@@ -1,4 +1,4 @@
-import { getEventDetails } from "@/actions/events";
+import { getEventAvailability, getEventDetails } from "@/actions/events";
 import { notFound } from "next/navigation";
 import React, { Suspense } from "react";
 import EventDetails from "./_components/event-details";
@@ -22,6 +22,8 @@ export async function generateMetadata({ params }: { params: { username: string;
 const EventPage = async ({ params }: { params: { username: string; eventId: string } }) => {
   const { username, eventId } = params;
   const event = await getEventDetails(username, eventId);
+  const availability = await getEventAvailability(eventId);
+
   if (!event) {
     notFound();
   }
@@ -29,7 +31,7 @@ const EventPage = async ({ params }: { params: { username: string; eventId: stri
     <div className="flex flex-col justify-center lg:flex-row px-4 py-8">
       <EventDetails event={event} />
       <Suspense fallback={<div>Loading Booking Form..</div>}>
-        <BookingForm />
+        <BookingForm event={event} availability={availability} />
       </Suspense>
     </div>
   );
