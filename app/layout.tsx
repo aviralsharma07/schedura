@@ -4,6 +4,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import Header from "@/components/header";
 import CreateEventDrawer from "@/components/create-event";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,8 +27,16 @@ export default function RootLayout({
           <main className="min-h-screen bg-gradient-to-b from-blue-50 to-white">{children}</main>
           {/* Footer */}
           <footer className="bg-blue-100 py-12">
-            <div className="container mx-auto px-4 text-center text-gray-600">
+            <div className="container flex gap-2 md:text-base text-[10px] justify-center mx-auto px-4 text-center text-gray-600">
               <p>Made with &#x2764; by Aviral</p>
+              {" | "}
+              <Link href="https://github.com/aviralsharma07/schedura" className="hover:text-blue-500 hover:underline hover:font-semibold" target="_blank">
+                Github
+              </Link>
+              {" | "}
+              <Link href="/privacy-policy" className="hover:text-blue-500 hover:underline hover:font-semibold" target="_blank">
+                Privacy Policy
+              </Link>
             </div>
           </footer>
           <CreateEventDrawer />
