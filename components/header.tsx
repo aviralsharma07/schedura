@@ -12,7 +12,8 @@ const Header = async () => {
   return (
     <nav className="mx-auto py-2 px-4 flex justify-between items-center shadow-md border-b-2 bg-white">
       <Link href="/" className="flex items-center">
-        <Image src="/logo.png" alt="Logo" width={150} height={60} className="h-16 w-auto" />
+        {/* <Image src="/logo.png" alt="Logo" width={150} height={60} className="h-16 w-auto" /> */}
+        <span className="text-4xl font-bold text-black">Schedura</span>
       </Link>
 
       <div className="flex items-center gap-4">
