@@ -10,7 +10,7 @@ const PrivacyPolicy = () => {
         </p>
 
         <section className="mb-8">
-          <p className="text-gray-700 leading-relaxed">Schedura ("Company", "We", "Us", or "Our") respects your privacy and is committed to protecting it through this Privacy Policy. This document explains how we collect, use, and share your information when you use our Service, as well as your rights and how the law protects you.</p>
+          <p className="text-gray-700 leading-relaxed">Schedura (&quot;Company&quot;, &quot;We&quot;, &quot;Us&quot;, or &quot;Our&quot;) respects your privacy and is committed to protecting it through this Privacy Policy. This document explains how we collect, use, and share your information when you use our Service, as well as your rights and how the law protects you.</p>
           <p className="text-gray-700 leading-relaxed mt-4">By using the Service, you agree to the collection and use of information in accordance with this Privacy Policy.</p>
         </section>
 
@@ -22,7 +22,7 @@ const PrivacyPolicy = () => {
               <strong>Account:</strong> Refers to the Google account you use to access the Service.
             </li>
             <li>
-              <strong>Company:</strong> (referred to as "We", "Us", or "Our") refers to Schedura.
+              <strong>Company:</strong> (referred to as &quot;We&quot;, &quot;Us&quot;, or &quot;Our&quot;) refers to Schedura.
             </li>
             <li>
               <strong>Device:</strong> Any device capable of accessing the Service, such as a computer, phone, or tablet.
