@@ -21,6 +21,9 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
+        <head>
+          <meta name="google-site-verification" content="FY8Y5EpIMe8orVBkxxhZsP6CaZl6u0eAYPWOtQ3RgC8" />
+        </head>
         <body className={inter.className}>
           {/* Header */}
           <Header />
