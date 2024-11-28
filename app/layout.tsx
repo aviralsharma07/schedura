@@ -27,7 +27,7 @@ export default function RootLayout({
         <body className={inter.className}>
           {/* Header */}
           <Header />
-          <main className="min-h-screen bg-gradient-to-b from-blue-50 to-white">{children}</main>
+          <main className="min-h-screen overflow-hidden bg-gradient-to-b from-blue-50 to-white">{children}</main>
           {/* Footer */}
           <footer className="bg-blue-100 py-12">
             <div className="container flex gap-2 md:text-base text-[10px] justify-center mx-auto px-4 text-center text-gray-600">
